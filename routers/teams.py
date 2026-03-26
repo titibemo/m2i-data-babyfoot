@@ -30,3 +30,24 @@ async def get_team(team_id: int, db: Session = Depends(get_db)):
     if team is None:
         raise HTTPException(status_code=404, detail=f"Équipe {team_id} non trouvée")
     return team
+
+# update team by id
+@router.put("/{team_id}", response_model=GetTeams)
+async def update_team(team_id: int, payload: Teams, db: Session = Depends(get_db)):
+    team = get_team_by_id(db, team_id)
+    if team is None:
+        raise HTTPException(status_code=404, detail=f"Équipe {team_id} non trouvée")
+    team.player_1 = payload.joueur1
+    team.player_2 = payload.joueur2
+    db.commit()
+    return team
+
+# delete team by id
+@router.delete("/{team_id}", response_model=GetTeams)
+async def delete_team(team_id: int, db: Session = Depends(get_db)):
+    team = get_team_by_id(db, team_id)
+    if team is None:
+        raise HTTPException(status_code=404, detail=f"Équipe {team_id} non trouvée")
+    db.delete(team)
+    db.commit()
+    return team

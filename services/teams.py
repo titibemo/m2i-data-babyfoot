@@ -25,3 +25,14 @@ def get_all_teams(db: Session):
 
 def get_team_by_id(db: Session, team_id: int):
     return db.query(Team).filter(Team.id == team_id).first()
+
+def update_team_by_id(db: Session, team_id: int, player_1: str, player_2: str):
+    team = db.query(Team).filter(Team.id == team_id).first()
+    team.player_1 = player_1
+    team.player_2 = player_2
+    db.commit()
+    
+def delete_team_by_id(db: Session, team_id: int):
+    team = db.query(Team).filter(Team.id == team_id).first()
+    db.delete(team)
+    db.commit()
