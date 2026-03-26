@@ -30,6 +30,7 @@ class Team(Base):
     __tablename__ = "team"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(50), nullable=False)
     player_1: Mapped[str] = mapped_column(String(50), nullable=False)
     player_2: Mapped[str] = mapped_column(String(255), nullable=False)
 

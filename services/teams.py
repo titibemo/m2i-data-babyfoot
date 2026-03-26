@@ -6,7 +6,7 @@ from services.users import get_user_by_username
 from models.teams import Team
 
 
-def create_team(db: Session, player_1: str, player_2: str):
+def create_team(db: Session, player_1: str, player_2: str, name: str):
     """
     Créé une équipe de deux joueurs
     """
@@ -14,7 +14,7 @@ def create_team(db: Session, player_1: str, player_2: str):
     is_player_2 = get_user_by_username(db, player_2)
     if is_player_1 is None or is_player_2 is None:
         return None
-    team = Team(player_1=player_1, player_2=player_2)
+    team = Team(player_1=player_1, player_2=player_2, name=name)
     db.add(team)
     db.commit()
     db.refresh(team)
@@ -26,10 +26,11 @@ def get_all_teams(db: Session):
 def get_team_by_id(db: Session, team_id: int):
     return db.query(Team).filter(Team.id == team_id).first()
 
-def update_team_by_id(db: Session, team_id: int, player_1: str, player_2: str):
+def update_team_by_id(db: Session, team_id: int, player_1: str, player_2: str, name: str):
     team = db.query(Team).filter(Team.id == team_id).first()
     team.player_1 = player_1
     team.player_2 = player_2
+    team.name = name
     db.commit()
     
 def delete_team_by_id(db: Session, team_id: int):

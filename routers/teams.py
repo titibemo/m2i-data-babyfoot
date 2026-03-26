@@ -15,7 +15,7 @@ router = APIRouter(prefix="/teams", tags=["Teams"])
 # créer une tema avec deux joueurs:
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_new_team(payload: Teams, db: Session = Depends(get_db)):
-    team = create_team(db, payload.joueur1, payload.joueur2)
+    team = create_team(db, payload.joueur1, payload.joueur2, payload.name)
     return {"team créé": team}
 
 @router.get("/", response_model=list[GetTeams])

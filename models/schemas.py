@@ -73,9 +73,11 @@ class LoginResponse(TokenResponse):
 class Teams(BaseModel):
     joueur1: str
     joueur2: str
+    name: str
     
 class GetTeams(BaseModel):
     player_1: str
     player_2: str
+    name: str
     
     model_config = {"from_attributes": True}
