@@ -22,3 +22,6 @@ def create_team(db: Session, player_1: str, player_2: str):
 
 def get_all_teams(db: Session):
     return db.query(Team).all()
+
+def get_team_by_id(db: Session, team_id: int):
+    return db.query(Team).filter(Team.id == team_id).first()

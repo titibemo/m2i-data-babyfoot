@@ -29,8 +29,8 @@ class Team(Base):
 
     __tablename__ = "team"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    player_1: Mapped[str] = mapped_column(String(50), unique=True, index=True, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True, autoincrement=True)
+    player_1: Mapped[str] = mapped_column(String(50), nullable=False)
     player_2: Mapped[str] = mapped_column(String(255), nullable=False)
 
 
